@@ -5,7 +5,8 @@
 Compute the exact confidence interval and p-value for risk difference, risk ratio, rate difference or rate ratio in meta analysis using fixed effect model. 
 }
 \usage{
-meta.exact(data, type="risk difference", BB.grdnum=2000, B.sim=20000, cov.prob=0.95,
+meta.exact(data, type="risk difference", BB.grdnum=2000, B.sim=20000, cov.prob=0.95, 
+
 midp=T, print=T, studyCI=T, ratio.upper=1000)
 }
 \arguments{
@@ -13,7 +14,7 @@ midp=T, print=T, studyCI=T, ratio.upper=1000)
 The data matrix summarizing information from multiple studies needed in the meta analysis. The first column consists of the numbers of events in arm 1; the second column consists of the numbers of events in arm 2; the third column consists of the sample sizes or total follow up times in arm 1 and the fourth column consists of the sample sizes or total follow up times in arm 2. Each row contains data from a study.
 }
 \item{type}{
-The parameter of interest. It can be "risk difference" (the difference of two binomial proportions); "risk ratio" (the ratio of two binomial proportions); "rate difference" (the difference of two Poission rates) and "rate ratio" (the ratio of two Poisson rates). 
+The parameter of interest. It can be ``risk difference" (the difference of two binomial proportions); "risk ratio" (the ratio of two binomial proportions); "rate difference" (the difference of two Poission rates) and "rate ratio" (the ratio of two Poisson rates). 
 }
 \item{BB.grdnum}{
 The number of grid points used in searching the ends of the confidence interval. A bigger value increases the precision of the constructed confidence interval.
@@ -25,13 +26,13 @@ The number of Monte-carlo simulations used to generate the null-distribution bas
 The coverage probability of the confidence interval to be constructed.
 }
 \item{midp}{
-TRUE/FALSE, the indicator for if the mid-p values are used in calculating the exact p-values and constructing the exact confidence intervals. The results are more conservative wihout using mid-p values.
+The binary indicator for if the mid-p values are used in calculating the exact p-values and constructing the exact confidence intervals. The results are more conservative wihout using mid-p values.
 }
 \item{print}{
-TRUE/FALSE, the indicator for if the computing progress is printed during the computation.
+The binary indicator for if the computing progress is printed during the computation.
 }
 \item{studyCI}{
-TRUE/FALSE, the indicator for if the confidence interval and p-value for individual study are reported.
+The binary indicator for if the confidence interval and p-value for individual study are reported.
 }
 \item{ratio.upper}{
 A value indicating the limits in computing the confidence interval for either the risk ratio or rate ratio. The default value of 1000 means that the widest confidence interval for the ratio is (0.001, 1000).
@@ -39,10 +40,10 @@ A value indicating the limits in computing the confidence interval for either th
 }
 \value{
 \item{ci.fixed}{
-A matrix reporting the point estimators, confidence intervals, and p-values from three methods: constant weighting, inverse-variance weighting and Fisher's weighting. Normally, the result from the inverse-variance weighting method is recommended. It also reports the corresponding result from the asymptotical MH method with automatic continuity correction for zero event. The last column of the matrix provides the range used for searching the confidence limits. When a confidence limit is the same as the range limit, the true confidence interval goes beyond the specified range.
+A matrix reporting the point estimators, confidence intervals, and p-values from three methods: constant weighting, inverse-variance weighting and Fisher's weighting. Normally, the result from the inverse-variance weighting method is recommended. It also reports the corresponding result from the asymptotical MH method with or without continuity correction as specified by users. When type is either "risk ratio" or "rate ratio", the continuity correction are automatically made for zero event. The last column of the matrix provides the range used for searching the confidence limits. When a confidence limit is the same as the range limit, the true confidence interval goes beyond the specified range.
 }
 \item{study.ci}{
-When \code{studyCI}=T, \code{study.ci} is a matrix reporting the point estimators (the first column), confidence intervals (the second and thrid columns), p values (the fourth column) and if the confidence interval goes beyond the pre-specified range: 1 if within the range and 0 otherwise (the fifth column). 
+When "studyCI=T", "study.ci" is a matrix reporting the point estimators (the first column), confidence intervals (the second and thrid columns), p values (the fourth column) and if the confidence interval goes beyond the pre-specified range: 1 if within the range and 0 otherwise (the fifth column). 
 }
 \item{precision}{
 The precision used to search the limit of the confidence interval. It can be improved by increasing "BB.grdnum" in the arguments.
@@ -60,5 +61,4 @@ meta.exact(data, type="risk difference", BB.grdnum=100, studyCI=FALSE)
 meta.exact(data, type="rate difference", BB.grdnum=100, studyCI=FALSE)
 meta.exact(data, type="risk ratio", BB.grdnum=100, studyCI=FALSE)
 meta.exact(data, type="rate ratio", BB.grdnum=100)
-
 }

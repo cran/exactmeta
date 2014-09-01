@@ -1,14 +1,16 @@
-\name{exactmeta-package}
-\alias{exactmeta-package}
-\alias{exactmeta}
+\name{metaexact-package}
+\alias{metaexact-package}
+\alias{metaexact}
 \docType{package}
 \title{Exact Meta Analysis for Rare Events Data}
 \description{
-Compute the exact confidence interval and p-value for risk difference, risk ratio, rate difference and rate ratio in meta analysis using fixed effect model without artificial continuity correction. The validity of the output does not depend on asymptotical approximation and thus the method is suitable for analyzing rare event data. 
+Compute the exact confidence interval and p-value for risk difference, risk ratio, rate difference and rate ratio in meta analysis using fixed effect model without artificial continuity correction. The validity of the output does not depend on asymptotical approximation and thus the method is suitable for analyzing rare event data. \\
+
+The current version corrected the computations of the asympototical MH confidence intervals for risk ratio and rate ratio.
 }
 \details{
 \tabular{ll}{
-Package: \tab exactmeta\cr
+Package: \tab metaexact\cr
 Type: \tab Package\cr
 Version: \tab 1.0-1\cr
 Date: \tab 2013-11-15\cr
@@ -18,7 +20,7 @@ The pacakge includes the main functions "meta.exact" and "study.exact". When the
 }
 \author{Yilei Yu and Lu Tian
 
-Maintainer:  Lu Tian <lutian@stanford.edu>
+Maintainer: Yilei Yu <yuyilei217@gmail.com> and Lu Tian <lutian@stanford.edu>
 }
 \references{
 Tian, L., Cai, T., Pfeffer, M., Piankov, N., Cremieux, P.,  and Wei, LJ. (2008). Exact and effcient inference procedure for meta-analysis and its application to the analysis of independent two by two tables with all available  data but without artificial  continuity correction. Biostatistics, 10(2):275-281.}

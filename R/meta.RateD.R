@@ -1,5 +1,5 @@
 meta.RateD <-
-function(data.mi, BB.grdnum, B.sim, cov.prob, midp, MH.imputation=T, print, studyCI)
+function(data.mi, BB.grdnum=1000, B.sim=10000, cov.prob=0.95, midp=T, MH.imputation=F, print=T, studyCI=T)
   {
     n=length(data.mi[,1])
     e1=data.mi[,3];             e2=data.mi[,4]

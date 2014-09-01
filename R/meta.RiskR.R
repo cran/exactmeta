@@ -1,5 +1,5 @@
 meta.RiskR <-
-function(data.mi, BB.grdnum, B.sim, cov.prob, print, studyCI, midp, ratio.upper)
+function(data.mi, BB.grdnum=1000, B.sim=20000, cov.prob=0.95, print=T, studyCI=T, midp=T, ratio.upper=1000)
   {
     data.original=data.mi
   
@@ -12,16 +12,21 @@ function(data.mi, BB.grdnum, B.sim, cov.prob, print, studyCI, midp, ratio.upper)
     id=(1:n)[d1*d2==0]
     p1[id]=(d1[id]+0.5)/(n1[id]+1);  p2[id]=(d2[id]+0.5)/(n2[id]+1)
 
-    deltap=log(p2)-log(p1)
-    varp=(1-p1)/n1/p1+(1-p2)/n2/p2
     weight=(n1*n2/(n1+n2))/sum(n1*n2/(n1+n2))
-    mu.MH=sum(deltap*weight);  sd.MH=sqrt(sum(weight^2*varp))
+    
+    varp1=p1*(1-p1)/n1
+    varp2=p2*(1-p2)/n2
+    p1.pool=sum(p1*weight)
+    p2.pool=sum(p2*weight)
+
+    mu.MH=log(p2.pool)-log(p1.pool)
+    sd.MH=sqrt(sum(varp2*weight^2)/p2.pool^2+sum(varp1*weight^2)/p1.pool^2)    
     ci.MH=c(mu.MH-qnorm((1+cov.prob)/2)*sd.MH, mu.MH+qnorm((1+cov.prob)/2)*sd.MH)
     p.MH=1-pchisq(mu.MH^2/sd.MH^2,1)
  
     d0=max(abs(ci.MH))
     BB.grdnum=2*round(BB.grdnum/2)+1
-    delta.grd=exp(seq(max(-log(ratio.upper), -d0*4), min(log(ratio.upper), d0*4),length=BB.grdnum))
+    delta.grd=exp(seq(-min(log(ratio.upper), d0*4), min(log(ratio.upper), d0*4),length=BB.grdnum))
     
 
     pv1.pool=pv2.pool=numeric(0)

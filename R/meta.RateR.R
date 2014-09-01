@@ -1,5 +1,5 @@
 meta.RateR <-
-function(data.mi, BB.grdnum, B.sim, cov.prob, print, studyCI, midp, ratio.upper)
+function(data.mi, BB.grdnum=5000, B.sim=10000, cov.prob=0.95, print=T, studyCI=T, midp=T, ratio.upper=1000)
   {
     data.orginal=data.mi
 
@@ -13,11 +13,17 @@ function(data.mi, BB.grdnum, B.sim, cov.prob, print, studyCI, midp, ratio.upper)
     id=(1:n)[n1*n2==0]
     lambda1[id]=(n1[id]+0.5)/e1[id];  
     lambda2[id]=(n2[id]+0.5)/e2[id]
-             
-    deltalambda=log(lambda2/lambda1)
-    varlambda=1/(lambda2*e2)+1/(lambda1*e1)
+    
     weight=(e1*e2/(e1+e2))/sum(e1*e2/(e1+e2))
-    mu.MH=sum(deltalambda*weight);  sd.MH=sqrt(sum(weight^2*varlambda))
+    lambda1.pool=sum(lambda1*weight)
+    lambda2.pool=sum(lambda2*weight)
+    varlambda1=1/n1
+    varlambda2=1/n2
+   
+  
+    mu.MH=log(lambda2.pool)-log(lambda1.pool);  
+    sd.MH=sqrt(sum(varlambda2*weight^2)/lambda2.pool^2+sum(varlambda1*weight^2)/lambda1.pool)
+
     ci.MH=c(mu.MH-qnorm((1+cov.prob)/2)*sd.MH, mu.MH+qnorm((1+cov.prob)/2)*sd.MH)
     p.MH=1-pchisq(mu.MH^2/sd.MH^2,1)
  

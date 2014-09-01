@@ -1,5 +1,5 @@
 meta.RiskD <-
-function(data.mi, BB.grdnum, B.sim, cov.prob, midp, MH.imputation=T, print, studyCI)
+function(data.mi, BB.grdnum=1000, B.sim=20000, cov.prob=0.95, midp=T, MH.imputation=F, print=T, studyCI=T)
   {
     n=length(data.mi[,1])
     n1=data.mi[,3];             n2=data.mi[,4]
@@ -19,7 +19,7 @@ function(data.mi, BB.grdnum, B.sim, cov.prob, midp, MH.imputation=T, print, stud
     p.MH=1-pchisq(mu.MH^2/sd.MH^2,1)
  
     d0=max(abs(ci.MH))
-    delta.grd=seq(max(-1, -d0*5), min(1, d0*5),length=BB.grdnum-1); delta.grd=sort(c(0,delta.grd))
+    delta.grd=seq(-min(1, 5*d0), min(1, d0*5),length=BB.grdnum-1); delta.grd=sort(c(0,delta.grd))
 
     
 

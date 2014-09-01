@@ -5,7 +5,9 @@
 Compute the exact confidence interval and p-value for risk difference, risk ratio, rate difference and rate ratio based on data from an individual study. 
 }
 \usage{
-study.exact(x1, x2, n1, n2, type="risk difference", BB.grdnum=2000, cov.prob=0.95, midp=T)
+study.exact(x1, x2, n1, n2, type="risk difference", BB.grdnum=2000, cov.prob=0.95, 
+
+midp=T)
 }
 
 \arguments{
@@ -39,7 +41,6 @@ The number of grid points used in searching the limits of the confidence interva
 
 
 \examples{
-
 
 study.exact(1, 2, 12, 10, BB.grdnum=100, type="risk difference")
 study.exact(1, 2, 12, 10, BB.grdnum=100, type="rate difference")
